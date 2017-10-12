@@ -1,0 +1,30 @@
+////ioCog Rules File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+
+Rule FindX(
+	Context (Goal FindX);
+	Stop (StopID <stop1>, Long <long1>, Lat <lat1>);
+	Stop (StopID <stop2>, Long <long2>, Lat <lat2>);
+	Stop (StopID { <stop3> <> <stop1> <> <stop2> }, Long <long3>, Lat <lat3>);
+	Stop (StopID {<stop4> <> <stop1> <> <stop2> }, Long <long4>, Lat <lat4>);
+	Path (Stop1 <stop1>, Stop2 <stop2>, Distance <distance1>);
+	Path (Stop1 <stop3>, Stop2 <stop4>, Distance <distance2>);
+	! Intersection (Stop1 <stop1>, Stop2 <stop2>, Stop3 <stop3>, Stop4 <stop4>);
+-->
+	Set <slope1> = Calc(<lat2> <lat1> - <long2> <long1> - /);
+	Set <slope2> = Calc(<lat4> <lat3> - <long4> <long3> - /);
+	Set <longx> = Calc(<lat3> <lat1> - <long1> <slope1> * + <long3> <slope2> * - <slope1> <slope2> - /);
+	Set <latx> = Calc(<longx> <long1> - <slope1> * <lat1> +);
+	Make Intersection (Stop1 <stop1>, Stop2 <stop2>, Stop3 <stop3>, Stop4 <stop4>, Distance1 <distance1>, Distance2 <distance2>, xLong <longx>, xLat <latx>);
+);
+
+Rule Goal1(
+	Context (Goal FindX);
+-->
+	Write ("Trimming out of bounds intersections");
+	Modify 1 (Goal TrimX);
+);
+

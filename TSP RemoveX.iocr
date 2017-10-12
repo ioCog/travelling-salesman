@@ -1,0 +1,47 @@
+////ioCog Rules File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+
+
+Rule RemoveX1(
+	Context (Goal RemoveX);
+	Intersection (Distance1 <distance1>, Distance2 <= <distance1>, Stop1 <stop1>, Stop2 <stop2>);
+	Path (Stop1 <stop1>, Stop2 <stop2>);
+-->
+	Remove 2;
+	Remove 3;
+);
+
+Rule RemoveX2(
+	Context (Goal RemoveX);
+	Intersection (Distance1 <distance1>, Distance2 >= <distance1>, Stop3 <stop3>, Stop4 <stop4>);
+	Path (Stop1 <stop3>, Stop2 <stop4>);
+-->
+	Remove 2;
+	Remove 3;
+);
+
+Rule CleanX3(
+	Context (Goal RemoveX);
+	Intersection (Stop1 <stop1>, Stop2 <stop2>);
+	! Path (Stop1 <stop1>, Stop2 <stop2>);
+-->
+	Remove 2;
+);
+
+Rule CleanX4(
+	Context (Goal RemoveX);
+	Intersection (Stop3 <stop3>, Stop4 <stop4>);
+	! Path (Stop1 <stop3>, Stop2 <stop4>);
+-->
+	Remove 2;
+);
+
+Rule GoalFP(
+	Context (Goal RemoveX);
+-->
+	Modify 1 (Goal FindPaths);
+);
+

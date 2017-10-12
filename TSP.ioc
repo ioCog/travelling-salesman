@@ -1,0 +1,22 @@
+////ioCog Program File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+Project "Travelling Salesman";
+
+verbosity 0;
+
+load TSP.iocc;
+load TSP.iocb;
+load "TSP Start.iocr";
+load "TSP FindX.iocr";
+load "TSP TrimX.iocr";
+load "TSP RemoveX.iocr";
+load "TSP FindPaths.iocr";
+load "TSP Cull.iocr";
+load "TSP Reload.iocr";
+load "TSP Complete.iocr";
+load "TSP Shortest.iocr";
+load TSP.iocd;
+load TSP.iocs;

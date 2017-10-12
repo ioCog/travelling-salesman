@@ -1,0 +1,25 @@
+////ioCog Rules File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+
+
+Rule BackToDepot(
+	Context (Goal Back);
+	Route (Path {<path> Length = 10}, Distance <prev>);
+	Set <last> = Pop(<path>);
+	Path (Stop1 = 0, Stop2 = <last>, Distance <dist>);
+-->
+	Set <newdist> = Calc(<prev> <dist> +);
+	Set <newpath> = [<path>,<last>,0];
+	Modify 2 (Path <newpath>, Distance <newdist>);
+);
+
+Rule GoalShortest(
+	Context (Goal Back);
+-->
+	Write ("Finding Shortest Route");
+	Modify 1 (Goal Shortest);
+);
+

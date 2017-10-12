@@ -1,0 +1,15 @@
+////ioCog Rules File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+
+
+Rule FoundShortest(
+	Context (Goal Shortest);
+	Distance (Min <dist>);
+	CompleteRoute (Path <path>, Distance <dist>);
+-->
+	Write ($"Found shortest route {<path>}, distance {<dist>}");
+	Remove 1;
+);

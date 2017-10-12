@@ -1,0 +1,11 @@
+////ioCog Data File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+
+SQLLOAD;
+
+Make Context(Goal Start);
+Make Distance (Min 999999);
+

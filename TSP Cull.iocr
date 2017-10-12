@@ -1,0 +1,22 @@
+////ioCog Rules File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+
+
+Rule Cull(
+	Context (Goal Cull);
+	Route (Path {<path> Length < 9});
+-->
+//	Write ($"Culling route {<path>}");
+	Remove 2;
+);
+
+Rule GoalBack(
+	Context (Goal Cull);
+-->
+	Write ("Finding path back to Depot");
+	Modify 1 (Goal Reload);
+);
+

@@ -1,0 +1,29 @@
+////ioCog Rules File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+
+
+Rule Reload(
+	Context (Goal Reload);
+-->
+	Write ("Reloading paths");
+	SQLLoadChanges Path;
+	Modify 1 (Goal Reload2);
+);
+
+Rule ReversePaths (
+	Context (Goal Reload2);
+	Path (Stop1 <stop1>, Stop2 <stop2>, Distance <dist>);
+	! Path (Stop1 <stop2>, Stop2 <stop1>);
+-->
+	Make Path (Stop1 <stop2>, Stop2 <stop1>, Distance <dist>);
+);
+
+Rule GoalBack(
+	Context (Goal Reload2);
+-->
+	Modify 1 (Goal Complete);
+	Write ("Completing routes back to Depot");
+);

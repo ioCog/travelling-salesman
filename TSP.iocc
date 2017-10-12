@@ -1,0 +1,52 @@
+////ioCog Class File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+Class Path(
+	Stop1,
+	Stop2,
+	Distance
+);
+
+Class Stop(
+	StopID,
+	Long,
+	Lat,
+	IsDepot
+);
+
+Class Intersection(
+	Stop1,
+	Stop2,
+	Stop3,
+	Stop4,
+	Distance1,
+	Distance2,
+	Xlong,
+	Xlat
+);
+
+Class Context(
+	Goal
+);
+
+Class Route(
+	Path,
+	Distance
+);
+
+Class CompleteRoute(
+	Path,
+	Distance
+);
+
+Class ReturnStep(
+	Route,
+	Step,
+	Stop
+);
+
+Class Distance(
+	Min
+);

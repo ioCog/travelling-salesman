@@ -1,0 +1,86 @@
+////ioCog Rules File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+
+Rule TrimX1(
+	Context(Goal TrimX);
+	Stop (StopID <stop1>, Long <long1>);
+	Stop (StopID <stop2>, Long <long2>);
+	Intersection (Stop1 <stop1>, Stop2 <stop2>, xLong { > <long1> > <long2> });
+-->
+	Remove 4;
+);
+
+Rule TrimX2(
+	Context(Goal TrimX);
+	Stop (StopID <stop3>, Long <long3>);
+	Stop (StopID <stop4>, Long <long4>);
+	Intersection (Stop3 <stop3>, Stop4 <stop4>, xLong { > <long3> > <long4> });
+-->
+	Remove 4;
+);
+
+Rule TrimX3(
+	Context(Goal TrimX);
+	Stop (StopID <stop1>, Long <long1>);
+	Stop (StopID <stop2>, Long <long2>);
+	Intersection (Stop1 <stop1>, Stop2 <stop2>, xLong { < <long1> < <long2> });
+-->
+	Remove 4;
+);
+
+Rule TrimX4(
+	Context(Goal TrimX);
+	Stop (StopID <stop3>, Long <long3>);
+	Stop (StopID <stop4>, Long <long4>);
+	Intersection (Stop3 <stop3>, Stop4 <stop4>, xLong { < <long3> < <long4> });
+-->
+	Remove 4;
+);
+
+Rule TrimX5(
+	Context(Goal TrimX);
+	Stop (StopID <stop1>, Lat <long1>);
+	Stop (StopID <stop2>, Lat <long2>);
+	Intersection (Stop1 <stop1>, Stop2 <stop2>, xLat { > <lat1> > <lat2> });
+-->
+	Remove 4;
+);
+
+Rule TrimX6(
+	Context(Goal TrimX);
+	Stop (StopID <stop3>, Lat <long3>);
+	Stop (StopID <stop4>, Lat <long4>);
+	Intersection (Stop3 <stop3>, Stop4 <stop4>, xLat { > <lat3> > <lat4> });
+-->
+	Remove 4;
+);
+
+Rule TrimX7(
+	Context(Goal TrimX);
+	Stop (StopID <stop1>, Lat <long1>);
+	Stop (StopID <stop2>, Lat <long2>);
+	Intersection (Stop1 <stop1>, Stop2 <stop2>, xLat { < <lat1> < <lat2> });
+-->
+	Remove 4;
+);
+
+Rule TrimX8(
+	Context(Goal TrimX);
+	Stop (StopID <stop3>, Lat <long3>);
+	Stop (StopID <stop4>, Lat <long4>);
+	Intersection (Stop3 <stop3>, Stop4 <stop4>, xLat { < <lat3> < <lat4> });
+-->
+	Remove 4;
+);
+
+
+Rule Goal2(
+	Context (Goal TrimX);
+-->
+	Write ("Removing unwanted paths");
+	Modify 1 (Goal RemoveX);
+);
+

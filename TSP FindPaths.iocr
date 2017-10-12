@@ -1,0 +1,55 @@
+////ioCog Rules File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+Rule ReversePaths (
+	Context (Goal FindPaths);
+	Path (Stop1 <stop1>, Stop2 <stop2>, Distance <dist>);
+	! Path (Stop1 <stop2>, Stop2 <stop1>);
+-->
+	Make Path (Stop1 <stop2>, Stop2 <stop1>, Distance <dist>);
+);
+
+
+
+Rule StartRoute(
+	Context (Goal FindPaths);
+	Stop (IsDepot True, StopID <depot>);
+	! Route();
+-->
+	Make Route(Path [<depot>], Distance 0);
+	Write ("Starting routes from Depot");
+);
+
+Rule AddStep1(
+	Context (Goal FindPaths);
+	Route (Path <path>, Distance <prev>);
+	Set <last> = Pop(<path>);
+	Path (Stop1 <last>, Stop2 {<stop2> !IN <path>}, Distance <dist>);
+	Set <newpath> = [<path>,<last>,<stop2>];
+	! Route (Path <newpath>);
+-->
+	Set <newdist> = Calc(<prev> <dist> +);
+	Make Route (Path <newpath>, Distance <newdist>);
+);
+
+Rule AddStep2(
+	Context (Goal FindPaths);
+	Route (Path <path>, Distance <prev>);
+	Set <last> = Pop(<path>);
+	Path (Stop2 <last>, Stop1 {<stop2> !IN <path>}, Distance <dist>);
+	Set <newpath> = [<path>,<last>,<stop2>];
+	! Route (Path <newpath>);
+-->
+	Set <newdist> = Calc(<prev> <dist> +);
+	Make Route (Path <newpath>, Distance <newdist>);
+);
+
+Rule GoalReload(
+	Context (Goal FindPaths);
+-->
+	Write ("Completing routes");
+	Modify 1 (Goal Cull);
+);
+

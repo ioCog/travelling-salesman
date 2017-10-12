@@ -1,0 +1,19 @@
+////ioCog Bindings File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+SQLConnection DB (SQLSERVER, "data source=server;initial catalog=TSP;uid=ioCog;pwd=p@55w0rd;");
+
+SQLBind Stop (DB, Stop, READONLY,
+	Mapping (StopID StopID, Long Long, Lat Lat, IsDepot isDepot)
+);
+
+SQLBind Path (DB, Path, READONLY,
+	Mapping (Stop1 Stop1, Stop2 Stop2, Distance Distance)
+);
+
+
+
+
+

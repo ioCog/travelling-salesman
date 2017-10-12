@@ -1,0 +1,13 @@
+////ioCog Rules File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+
+Rule Start(
+	Context (Goal Start);
+-->
+	Write("Looking for intersections");
+	Modify 1 (Goal FindX);
+);
+

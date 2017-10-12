@@ -1,0 +1,55 @@
+////ioCog Rules File
+////Travelling Salesman
+////Rob Lewis
+////24-Aug-2017
+
+
+
+Rule CompleteToDepot(
+	Context (Goal Complete);
+	Route (Path {<path> Length < 10}, Distance <prev>, ID <id>);
+	Set <last> = Pop(<path>);
+	! ReturnStep (Route = <id>);
+	FindPath Path (Stop1 = <last>, Stop2 = 0, Step <stop>);
+-->
+	Make ReturnStep (Route <id>, Step <index>, Stop <stop>);
+);
+
+Rule CompleteRoute1(
+	Context (Goal Complete);
+	Route (Path {<path> Length < 9}, Distance <prev>, ID <id>);
+	Set <last> = Pop(<path>);
+	ReturnStep (Route = <id>, Step = 1, Stop <to>);
+	Path (Stop1 = <last>, Stop2 {<to> !IN <path>}, Distance <dist>);
+	Set <newdist> = Calc(<prev> <dist> +);
+	Distance (Min > <newdist>);
+-->
+	Set <newpath> = [<path>,<last>,<to>];
+	Write ($"(1) Route {<newpath>}");
+	Modify 2 (Path <newpath>, Distance <newdist>);
+);
+
+Rule CompleteRoute0(
+	Context (Goal Complete);
+	Route (Path {<path> Length = 9 }, Distance <prev>, ID <id>);
+	Set <last> = Pop(<path>);
+	Path (Stop1 <last>, Stop2 0, Distance <dist>);
+	Set <newdist> = Calc(<prev> <dist> +);
+	Distance (Min > <newdist>);
+-->
+	Set <newpath> = [<path>,<last>,0];
+	Write ($"(0) Found complete route {<newpath>} distance {<newdist>}");
+	Make CompleteRoute (Path <newpath>, Distance <newdist>);
+	Remove 2;
+	Modify 4 (Min <newdist>);
+);
+
+
+Rule GoalShortest(
+	Context (Goal Complete);
+-->
+	Write ("Finding Shortest Route");
+	Modify 1 (Goal Shortest);
+);
+
+

@@ -1,0 +1,11 @@
+////ioCog Screen File
+////Travelling Salesman
+////Rob Lewis
+////11 Oct 2017
+
+Screen (3, 1 500);
+Panel 1, "Paths", List, (Path (Stop1, Stop2, Distance), SORT (Stop1, Stop2)), Top, Left, Headings;
+Panel 2, "Part Routes", List, (Route (Path, Distance)), Top, Left, Headings;
+Panel 3, "Complete Routes", List, (CompleteRoute (Path, Distance) SORTDESC (Distance) ), Top, Left, Headings;
+
+
